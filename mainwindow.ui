@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="bConnect">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>340</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>bConnect</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="wGame" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>640</width>
+      <height>640</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bStartStop">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>250</y>
+      <width>201</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Resume</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="tPoints">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>140</y>
+      <width>104</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="tLevel">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>30</y>
+      <width>104</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>wGame</zorder>
+   <zorder>bConnect</zorder>
+   <zorder>bStartStop</zorder>
+   <zorder>tPoints</zorder>
+   <zorder>tLevel</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>900</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
