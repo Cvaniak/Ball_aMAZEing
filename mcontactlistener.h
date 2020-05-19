@@ -13,13 +13,12 @@ struct MContact {
     }
 };
 
-class MContactListener :public QWidget ,  public b2ContactListener{
-    Q_OBJECT
+class MContactListener :public b2ContactListener{
 public:
     std::vector<MContact>_contacts;
 
-    explicit MContactListener(QWidget *parent = nullptr);
-    virtual ~MContactListener();
+    MContactListener();
+     ~MContactListener();
 
     virtual void BeginContact(b2Contact* contact);
     virtual void EndContact(b2Contact* contact);

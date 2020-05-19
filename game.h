@@ -47,7 +47,7 @@ private:
     QTransform _transform;
     QVector<Object> _objects;
     MContactListener *contactListener;
-    QWidget *view;
+//    /QWidget *view;
 
 
 protected:

@@ -1,6 +1,6 @@
 #import "mcontactlistener.h"
 
-MContactListener::MContactListener(QWidget *parent) :QWidget(parent), _contacts() {
+MContactListener::MContactListener() :_contacts() {
 }
 
 MContactListener::~MContactListener() {

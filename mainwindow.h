@@ -21,12 +21,13 @@ public:
 private slots:
 
     void on_bConnect_clicked();
-    void on_star_collect();
+//    void on_star_collect();
 
 private:
     Ui::MainWindow *ui;
     ComPort comport;
-    Game *game;
+//    Game *game;
+//    Game *game;
 
 };
 #endif // MAINWINDOW_H

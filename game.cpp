@@ -10,8 +10,8 @@ Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
 //        _world = new b2World(gravity);
     _world = std::make_shared<b2World>(gravity);
 
-    contactListener = new MContactListener;
-    _world->SetContactListener(contactListener);
+    //contactListener = new MContactListener;
+    //_world->SetContactListener(contactListener);
 
     //QObject::connect(contactListener,SIGNAL(star_collect()),view,SLOT(on_star_collect()));
 
@@ -236,7 +236,7 @@ void Game::timerEvent(QTimerEvent *event) {
         _world->Step(1.0f/60.0f, 8, 6);
         update();
         QPoint p = this->mapFromGlobal(QCursor::pos());
-            qDebug() << contactListener->x << endl;
+//            qDebug() << contactListener->x << endl;
 //
 
         _world->SetGravity(b2Vec2(qMin((p.x()-180)/18, 10), -qMin((p.y()-320)/32, 10)));

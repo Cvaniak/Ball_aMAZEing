@@ -14,20 +14,20 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    game = new Game(this);
+    Game *game = new Game(this);
 
     game->resize(360, 640);
     game->start();
 //    game1->setGeometry(50,50,300,400);
-//    game1->show();
-    ui->wGame = game;
+//    game->show();
+//    ui->wGame = game;
 
 //    game = game1;
 }
 
 MainWindow::~MainWindow()
 {
-    delete game;
+//    delete game;
     delete ui;
 }
 
@@ -37,6 +37,6 @@ void MainWindow::on_bConnect_clicked()
     comport.show();
 }
 
-void MainWindow::on_star_collect(){
-    qDebug() << "YO";
-}
+//void MainWindow::on_star_collect(){
+//    qDebug() << "YO";
+//}
