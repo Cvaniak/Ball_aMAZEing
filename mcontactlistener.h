@@ -27,7 +27,11 @@ public:
     virtual void EndContact(b2Contact* contact);
     virtual void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
     virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
+    void addStar(int starId);
+    void setPlayer(int playerId);
     double x;
+    int _player;
+    QVector<int> _stars;
 signals:
     void star_collect();
 };

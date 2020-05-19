@@ -6,14 +6,14 @@
 Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
 {
     b2Vec2 gravity(0.0f, -10.0f);
-//    view = parent;
+    view = parent;
 //        _world = new b2World(gravity);
     _world = std::make_shared<b2World>(gravity);
 
     contactListener = new MContactListener(this);
-    //_world->SetContactListener(contactListener);
+    _world->SetContactListener(contactListener);
 
-    //QObject::connect(contactListener,SIGNAL(star_collect()),view,SLOT(on_star_collect()));
+    QObject::connect(contactListener,SIGNAL(star_collect()),view,SLOT(on_star_collect()));
 
 
 
@@ -56,6 +56,7 @@ Object Game::createWall(float x, float y, float w, float h, float angle) {
     bd.angle = angle * b2_pi;
 //        b2Body *o = _world->CreateBody(&bd);
     o.body = _world->CreateBody(&bd);
+    o.body->SetUserData((void*)312);
     // shape
     b2PolygonShape shape;
 //        const b2PolygonShape *shape = dynamic_cast<b2PolygonShape*>();
@@ -80,7 +81,9 @@ Object Game::createBall(const b2Vec2& pos, float radius) {
     bd.type = b2_dynamicBody;
     bd.position = pos;
     bd.allowSleep = false;
+
     o.body = _world->CreateBody(&bd);
+    o.body->SetUserData((void*)123);
     // shape
     b2CircleShape shape;
     shape.m_radius = radius;

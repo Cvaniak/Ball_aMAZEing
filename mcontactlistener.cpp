@@ -1,4 +1,6 @@
-#import "mcontactlistener.h"
+#include "mcontactlistener.h"
+#include <QDebug>
+#include <QtAlgorithms>
 
 MContactListener::MContactListener(QWidget *parent):
     QWidget(parent){
@@ -26,8 +28,12 @@ void MContactListener::EndContact(b2Contact* contact) {
 void MContactListener::PreSolve(b2Contact* contact,
   const b2Manifold* oldManifold) {
     x++;
-    emit star_collect();
-//    contact->SetEnabled(false);
+//    emit star_collect();
+//    contact->ge
+//    qDebug() << *(int*)contact->GetFixtureA()->GetBody()->GetUserData();// << " " << (QString*)contact->GetFixtureB()->GetUserData();
+//    if(qCount(_stars.begin(), _stars.end(), contact->GetFixtureA()))
+
+    //    contact->SetEnabled(false);
 }
 
 void MContactListener::PostSolve(b2Contact* contact,

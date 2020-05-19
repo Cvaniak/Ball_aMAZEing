@@ -21,7 +21,7 @@ public:
 private slots:
 
     void on_bConnect_clicked();
-//    void on_star_collect();
+    void on_star_collect();
 
 private:
     Ui::MainWindow *ui;
