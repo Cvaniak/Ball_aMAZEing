@@ -3,22 +3,25 @@
 
 #include <box2d.h>
 #include <QWidget>
+#include <QtWidgets>
+#include <QtCore/QObject>
 
-struct MContact {
-    b2Fixture *fixtureA;
-    b2Fixture *fixtureB;
-    bool operator==(const MContact& other) const
-    {
-        return (fixtureA == other.fixtureA) && (fixtureB == other.fixtureB);
-    }
-};
+//struct MContact {
+//    b2Fixture *fixtureA;
+//    b2Fixture *fixtureB;
+//    bool operator==(const MContact& other) const
+//    {
+//        return (fixtureA == other.fixtureA) && (fixtureB == other.fixtureB);
+//    }
+//};
 
-class MContactListener :public b2ContactListener{
+class MContactListener : public QWidget, public b2ContactListener{
+    Q_OBJECT
 public:
-    std::vector<MContact>_contacts;
+//    std::vector<MContact> _contacts;
 
-    MContactListener();
-     ~MContactListener();
+    explicit MContactListener(QWidget *parent = nullptr);
+    virtual ~MContactListener(){};
 
     virtual void BeginContact(b2Contact* contact);
     virtual void EndContact(b2Contact* contact);
@@ -26,7 +29,7 @@ public:
     virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
     double x;
 signals:
-//    void star_collect();
+    void star_collect();
 };
 
 #endif // MCONTACTLISTENER_H

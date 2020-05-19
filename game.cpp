@@ -10,7 +10,7 @@ Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
 //        _world = new b2World(gravity);
     _world = std::make_shared<b2World>(gravity);
 
-    //contactListener = new MContactListener;
+    contactListener = new MContactListener(this);
     //_world->SetContactListener(contactListener);
 
     //QObject::connect(contactListener,SIGNAL(star_collect()),view,SLOT(on_star_collect()));

@@ -1,10 +1,11 @@
 #import "mcontactlistener.h"
 
-MContactListener::MContactListener() :_contacts() {
+MContactListener::MContactListener(QWidget *parent):
+    QWidget(parent){
 }
 
-MContactListener::~MContactListener() {
-}
+//MContactListener::~MContactListener() {
+//}
 
 void MContactListener::BeginContact(b2Contact* contact) {
     // We need to copy out the data because the b2Contact passed in
@@ -25,7 +26,7 @@ void MContactListener::EndContact(b2Contact* contact) {
 void MContactListener::PreSolve(b2Contact* contact,
   const b2Manifold* oldManifold) {
     x++;
-    //emit star_collect();
+    emit star_collect();
 //    contact->SetEnabled(false);
 }
 
