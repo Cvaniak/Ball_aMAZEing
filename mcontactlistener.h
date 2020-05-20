@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QtWidgets>
 #include <QtCore/QObject>
+#include "game.h"
 
 //struct MContact {
 //    b2Fixture *fixtureA;
@@ -33,7 +34,7 @@ public:
     int _player;
     QVector<int> _stars;
 signals:
-    void star_collect();
+//    void star_collect(Object o);
 };
 
 #endif // MCONTACTLISTENER_H

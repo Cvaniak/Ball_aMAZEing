@@ -30,7 +30,18 @@ void MContactListener::PreSolve(b2Contact* contact,
     x++;
 //    emit star_collect();
 //    contact->ge
-//    qDebug() << *(int*)contact->GetFixtureA()->GetBody()->GetUserData();// << " " << (QString*)contact->GetFixtureB()->GetUserData();
+    Object *a = (Object *)contact->GetFixtureA()->GetBody()->GetUserData();
+    Object *b = (Object *)contact->GetFixtureB()->GetBody()->GetUserData();
+    qDebug() << a->type << " " << b->type;
+    if(a->type == StarObject && b->type==BallObject){
+//        b->body->GetWorld()->DestroyBody(b->body);
+//        emit star_collect(b);
+    }
+    else if(b->type == StarObject && a->type==BallObject){
+//        a->body->GetWorld()->DestroyBody(a->body);
+//          emit star_collect(a);
+
+    }
 //    if(qCount(_stars.begin(), _stars.end(), contact->GetFixtureA()))
 
     //    contact->SetEnabled(false);

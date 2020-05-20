@@ -37,6 +37,6 @@ void MainWindow::on_bConnect_clicked()
     comport.show();
 }
 
-void MainWindow::on_star_collect(){
-    qDebug() << "YO";
-}
+//void MainWindow::on_star_collect(){
+//    qDebug() << "YO";
+//}
