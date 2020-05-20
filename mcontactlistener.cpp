@@ -32,14 +32,14 @@ void MContactListener::PreSolve(b2Contact* contact,
 //    contact->ge
     Object *a = (Object *)contact->GetFixtureA()->GetBody()->GetUserData();
     Object *b = (Object *)contact->GetFixtureB()->GetBody()->GetUserData();
-    qDebug() << a->type << " " << b->type;
+//    qDebug() << a->type << " " << b->type;
     if(a->type == StarObject && b->type==BallObject){
 //        b->body->GetWorld()->DestroyBody(b->body);
-//        emit star_collect(b);
+        emit star_collect(*b);
     }
     else if(b->type == StarObject && a->type==BallObject){
 //        a->body->GetWorld()->DestroyBody(a->body);
-//          emit star_collect(a);
+          emit star_collect(*a);
 
     }
 //    if(qCount(_stars.begin(), _stars.end(), contact->GetFixtureA()))
@@ -49,4 +49,20 @@ void MContactListener::PreSolve(b2Contact* contact,
 
 void MContactListener::PostSolve(b2Contact* contact,
   const b2ContactImpulse* impulse) {
+    Object *a = (Object *)contact->GetFixtureA()->GetBody()->GetUserData();
+    Object *b = (Object *)contact->GetFixtureB()->GetBody()->GetUserData();
+    qDebug() << a->type<< " " << b->type;
+    if(a->type == StarObject && b->type==BallObject){
+//        b->body->GetWorld()->DestroyBody(b->body);
+        a->shouldDie = true;
+//        (*b).shouldDie = true;
+        emit star_collect(*a);
+    }
+    else if(b->type == StarObject && a->type==BallObject){
+//        a->body->GetWorld()->DestroyBody(a->body);
+        b->shouldDie = true;
+//        (*a).shouldDie = true;
+          emit star_collect(*b);
+
+    }
 }

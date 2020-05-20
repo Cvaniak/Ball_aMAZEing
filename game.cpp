@@ -14,7 +14,7 @@ Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
     MContactListener *contactListener = new MContactListener(this);
     _world->SetContactListener(contactListener);
 
-//    QObject::connect(contactListener,SIGNAL(star_collect(Object)),this,SLOT(on_star_delete(Object)));
+    QObject::connect(contactListener,SIGNAL(star_collect(Object)),this,SLOT(on_star_delete(Object)));
 
 
 
@@ -46,11 +46,11 @@ Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
 
 }
 
-Object Game::createWall(float x, float y, float w, float h, float angle) {
+Object* Game::createWall(float x, float y, float w, float h, float angle) {
     Object *o = new Object;
     // body
 //        const b2PolygonShape *shape = dynamic_cast<b2PolygonShape*>(o.fixture->GetShape());
-
+    o->shouldDie = false;
     b2BodyDef bd;
     bd.type = b2_staticBody;
     bd.position = b2Vec2(x+w/2.0f, y+h/2.0f);
@@ -74,11 +74,12 @@ Object Game::createWall(float x, float y, float w, float h, float angle) {
     o->type = WallObject;
     o->body->SetUserData((void*)o);
 //                .type = WallObj/ect;
-    return *o;
+    return o;
 }
 
-Object Game::createBall(const b2Vec2& pos, float radius) {
+Object* Game::createBall(const b2Vec2& pos, float radius) {
     Object *o = new Object;
+    o->shouldDie = false;
     // body
     b2BodyDef bd;
     bd.type = b2_dynamicBody;
@@ -98,11 +99,12 @@ Object Game::createBall(const b2Vec2& pos, float radius) {
     o->fixture = o->body->CreateFixture(&fd);
     o->type = BallObject;
     o->body->SetUserData((void*)o);
-    return *o;
+    return o;
 }
 
-Object Game::createStar(const b2Vec2& pos, float radius) {
+Object* Game::createStar(const b2Vec2& pos, float radius) {
     Object *o = new Object;
+    o->shouldDie = false;
     // body
     b2BodyDef bd;
     bd.type = b2_staticBody;
@@ -121,9 +123,10 @@ Object Game::createStar(const b2Vec2& pos, float radius) {
     o->fixture = o->body->CreateFixture(&fd);
     o->type = StarObject;
     o->body->SetUserData((void*)o);
+//    QObject::connect(contactListener,SIGNAL(star_collect(Object)),o,SLOT(die()));
 
 
-    return *o;
+    return o;
 }
 void Game::paintEvent(QPaintEvent *) {
     QPainter p(this);
@@ -182,16 +185,16 @@ void Game::paintEvent(QPaintEvent *) {
 
 
 
-    foreach(const Object& o, _objects) {
-        switch(o.type) {
+    foreach(const Object* o, _objects) {
+        switch(o->type) {
         case BallObject:
-            drawEllipse(&p, o);
+            drawEllipse(&p, *o);
             break;
         case StarObject:
-            drawEllipse(&p, o);
+            drawEllipse(&p, *o);
             break;
         case WallObject:
-            drawWall(&p, o);
+            drawWall(&p, *o);
             break;
 
         }
@@ -247,6 +250,26 @@ void Game::timerEvent(QTimerEvent *event) {
         QPoint p = this->mapFromGlobal(QCursor::pos());
 //            qDebug() << contactListener->x << endl;
 //
+//        foreach(const Object& o, _objects) {
+
+//            if(o.type == StarObject){
+//                o.body = nullptr;
+//            }
+
+//        }
+
+        // Remove all numbers < 0 from QVector<int>
+        QMutableVectorIterator<Object*> i(_objects);
+        while (i.hasNext()) {
+            if (i.next()->shouldDie == true){
+//                i.value()->shouldDie = true;
+                _world->DestroyBody(i.value()->body);
+
+                i.remove();
+            }
+//                i.value().type = WallObject;
+        }
+
 
         _world->SetGravity(b2Vec2(qMin((p.x()-180)/18, 10), -qMin((p.y()-320)/32, 10)));
     }
@@ -277,6 +300,7 @@ void Game::keyPressEvent(QKeyEvent *event)
     _world->SetGravity(gravity);
 }
 
-//void Game::on_star_delete(Object o){
-//    qDebug() << "deleted";
-//}
+void Game::on_star_delete(Object o){
+    qDebug() << "should " << o.shouldDie;
+
+}

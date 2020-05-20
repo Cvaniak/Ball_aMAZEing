@@ -6,7 +6,7 @@
 #include <QWidget>
 #include <QtCore/QObject>
 #include "mainwindow.h"
-#include "mcontactlistener.h"
+//#include "mcontactlistener.h"
 
 struct oType
 {
@@ -23,6 +23,8 @@ struct Object
     int type;
     b2Body *body;
     b2Fixture *fixture;
+    bool shouldDie;
+
 };
 
 class Game : public QWidget
@@ -32,9 +34,9 @@ public:
 
     explicit Game(QWidget *parent = nullptr);
     virtual ~Game(){};
-    Object createBall(const b2Vec2& pos, float radius);
-    Object createStar(const b2Vec2& pos, float radius);
-    Object createWall(float x, float y, float w, float h, float angle=0);
+    Object* createBall(const b2Vec2& pos, float radius);
+    Object* createStar(const b2Vec2& pos, float radius);
+    Object* createWall(float x, float y, float w, float h, float angle=0);
 
     void paintEvent(QPaintEvent *) override;
 
@@ -49,7 +51,7 @@ private:
     std::shared_ptr<b2World> _world;
     int _timerId;
     QTransform _transform;
-    QVector<Object> _objects;
+    QVector<Object*> _objects;
     QWidget *view;
 //    MContactListener contactListener;
 
@@ -57,7 +59,7 @@ private:
 protected:
      void keyPressEvent(QKeyEvent *event) override;
 private slots:
-//     void on_star_delete(Object o);
+     void on_star_delete(Object o);
 
 };
 
