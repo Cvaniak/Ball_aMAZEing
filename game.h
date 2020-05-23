@@ -5,7 +5,7 @@
 #include <QtWidgets>
 #include <QWidget>
 #include <QtCore/QObject>
-#include "mainwindow.h"
+//#include "mainwindow.h"
 //#include "mcontactlistener.h"
 
 struct oType
@@ -16,6 +16,8 @@ enum {
     BallObject,
     WallObject,
     StarObject,
+    HoleObject,
+    EndObject,
 } Objects;
 
 struct Object
@@ -37,14 +39,18 @@ public:
     Object* createBall(const b2Vec2& pos, float radius);
     Object* createStar(const b2Vec2& pos, float radius);
     Object* createWall(float x, float y, float w, float h, float angle=0);
+    Object* createHole(const b2Vec2& pos, float radius);
+    Object* createEnd(const b2Vec2& pos, float radius);
 
     void paintEvent(QPaintEvent *) override;
 
     void drawWall(QPainter *p, const Object& o);
     void drawEllipse(QPainter *p, const Object& o);
+    void drawHole(QPainter *p, const Object& o);
 
     void start();
     void timerEvent(QTimerEvent *event) override;
+    int points;
 
 private:
 //    b2World *_world;
@@ -55,12 +61,13 @@ private:
     QWidget *view;
 //    MContactListener contactListener;
 
-
 protected:
      void keyPressEvent(QKeyEvent *event) override;
-private slots:
-     void on_star_delete(Object o);
 
+private slots:
+//     void on_star_collect();
+//     void on_hole_collect();
+//     void on_end_collect();
 };
 
 #endif // GAME_H

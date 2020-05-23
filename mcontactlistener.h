@@ -34,7 +34,9 @@ public:
     int _player;
     QVector<int> _stars;
 signals:
-    void star_collect(Object o);
+    void star_collect();
+    void hole_collect();
+    void end_collect();
 };
 
 #endif // MCONTACTLISTENER_H

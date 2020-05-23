@@ -7,14 +7,14 @@
 #include <QDateTime>
 #include <QString>
 #include "comport.h"
-#include "game.h"
+//#include "game.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Game *game = new Game(this);
+    game = new Game(this);
 
     game->resize(360, 640);
     game->start();
@@ -37,6 +37,19 @@ void MainWindow::on_bConnect_clicked()
     comport.show();
 }
 
-//void MainWindow::on_star_collect(){
-//    qDebug() << "YO";
-//}
+
+void MainWindow::on_star_collect(){
+    qDebug() << "Collect " ;
+    game->points++;
+//    ui->tPoints->setNum();
+    ui->lPoints->setNum(game->points);
+
+}
+void MainWindow::on_hole_collect(){
+    qDebug() << "You fall down " ;
+
+}
+void MainWindow::on_end_collect(){
+    qDebug() << "You win " ;
+
+}
