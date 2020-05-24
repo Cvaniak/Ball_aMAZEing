@@ -230,7 +230,6 @@ void Game::paintEvent(QPaintEvent *) {
     QPoint mouse = this->mapFromGlobal(QCursor::pos());
     QRectF r(0, 0, 36, 64);
     if(isStmRunning){
-        qDebug() << stmPos.roll/90.0f*18.0f << stmPos.pitch/90.0f*18.0f;
         QRadialGradient radialGrad(QPointF(18-stmPos.roll/90.0f*60.0f, 32-stmPos.pitch/90.0f*60.0f), 100);
         radialGrad.setColorAt(0, Qt::gray);
         radialGrad.setColorAt(1, Qt::black);
@@ -306,6 +305,18 @@ void Game::drawEllipse(QPainter *p, const Object& o) {
     radialGrad.setColorAt(1, QColor(12, 22, 56));
     p->setBrush(radialGrad);
 
+    if(isStmRunning){
+         QRadialGradient radialGrad(QPointF(18-stmPos.roll/90.0f*60.0f, 32-stmPos.pitch/90.0f*60.0f), 100);
+        radialGrad.setColorAt(0, QColor(179, 220, 242));
+        radialGrad.setColorAt(1, QColor(12, 22, 56));
+        p->setBrush(radialGrad);
+    }
+    else{
+        QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 75);
+        radialGrad.setColorAt(0, QColor(179, 220, 242));
+        radialGrad.setColorAt(1, QColor(12, 22, 56));
+        p->setBrush(radialGrad);
+    }
 
     QPen pen;
     pen.setWidth(0.2);
