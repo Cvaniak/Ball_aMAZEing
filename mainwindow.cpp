@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     game = new Game(this, ui->wGame);
 
-
-    game->resize(360, 640);
+    game->resize(ui->wGame->size());
+//    game->resize(1000, 1000);
 //    game->setParent();
     game->start();
 
@@ -45,13 +45,6 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_bConnect_clicked()
-{
-
-
-}
-
-
 void MainWindow::on_star_collect(){
     qDebug() << "Collect " ;
     game->points++;
@@ -61,10 +54,18 @@ void MainWindow::on_star_collect(){
 }
 void MainWindow::on_hole_collect(){
     qDebug() << "You fall down " ;
+    start_stop(0);
+    game->isReset= 1;
+    game->points = 0;
+    ui->lPoints->setNum(0);
 
 }
 void MainWindow::on_end_collect(){
     qDebug() << "You win " ;
+    game->isReset= 1;
+    game->level++;
+    ui->lLevel->setNum(game->level);
+
 
 }
 
@@ -109,4 +110,16 @@ void MainWindow::on_is_stm(int isStm){
 //    qDebug() << isStm;
     stop_game();
     emit isStmConnected(isStm);
+}
+
+void MainWindow::on_set_points(int points, int addSet){
+
+    if(addSet == 0){
+        game->points++;
+    //    ui->tPoints->setNum();
+        ui->lPoints->setNum(game->points);
+    }
+    else{
+        ui->lPoints->setNum(points);
+    }
 }

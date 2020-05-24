@@ -21,12 +21,12 @@ public:
 
 private slots:
 
-    void on_bConnect_clicked();
     void on_star_collect();
     void on_hole_collect();
     void on_end_collect();
     void on_data_stm(QString stm);
     void on_is_stm(int isStm);
+    void on_set_points(int points, int addSet);
 
     void on_bStartStop_clicked();
     void stop_game();

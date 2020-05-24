@@ -6,13 +6,21 @@
 
 Game::Game(QWidget *viewT, QWidget* parent):QWidget(parent), _timerId(0)
 {
-    b2Vec2 gravity(0.0f, -10.0f);
+    b2Vec2 gravity(0.0f, 0.0f);
     view = viewT;
     points = 0;
+    level = 0;
     isRunning = 0;
     isStmRunning = 0;
+    isReset = 0;
     stmPos.roll = 0;
     stmPos.pitch = 0;
+    gameScale = 1.f;
+    gameWidth = parent->size().width()*gameScale;
+    gameHeight = parent->size().height()*gameScale;
+    gameStroke = 10.0f*gameScale;
+//    qDebug() << parent->size().width();
+
 //        _world = new b2World(gravity);
     _world = std::make_shared<b2World>(gravity);
 
@@ -24,35 +32,44 @@ Game::Game(QWidget *viewT, QWidget* parent):QWidget(parent), _timerId(0)
     QObject::connect(contactListener,SIGNAL(end_collect()),view,SLOT(on_end_collect()));
     QObject::connect(this,SIGNAL(mouseClicked()),view,SLOT(on_bStartStop_clicked()));
 
-
-    for(int i=0; i<1; i++) {
-        int dx = 18 - qrand() % 36;
-        int dy = qrand() % 2;
-        _objects.append(createBall(b2Vec2(18.0f+dx, 62.0f-dy), 1.0f));
-    }
-
-    _transform.scale(10.0f, -10.0f);
-    _transform.translate(0.0f, -64.0f);
-//        qDebug() << _transform.map(QPointF(0.0f,0.0f));
-//        qDebug() << _transform.map(QPointF(36.0f,64.0f));
-
-    _objects.append(createWall(0.0f, 0.0f, 36.0f, 1.0f));
-    _objects.append(createWall(0.0f, 0.0f, 1.0f, 64.0f));
-    _objects.append(createWall(35.0f, 0.0f, 1.0f, 64.0f));
-    _objects.append(createWall(0.0f, 63.0f, 36.0f, 1.0f));
-
-    _objects.append(createWall(0.0f, 32.0f, 18.0f, 1.0f));
-    _objects.append(createWall(18.0f, 16.0f, 18.0f, 1.0f));
-
-    _objects.append(createStar(b2Vec2(28.0f, 52.0f), 1.0f));
-    _objects.append(createHole(b2Vec2(14.0f, 52.0f), 1.0f));
-    _objects.append(createEnd(b2Vec2(14.0f, 40.0f), 1.0f));
-//    _objects.append(createWall(18.0f, 50.0f, 18.0f, 1.0f));
+    resetGame();
 
 
-//        _objects.append(createWall(4.0f, 48.0f, 8.0f, 1.0f));
-//        _objects.append(createWall(24.0f, 48.0f, 8.0f, 1.0f, -0.25f*b2_pi));
+}
 
+void Game::resetGame(){
+
+//    deleteAllObjects();
+//    emit mouseClicked();
+    points = 0;
+    isRunning = 0;
+    float gw = gameWidth;
+    float gh = gameHeight;
+    float gs = gameStroke;
+    _transform.scale(1/gameScale, 1/gameScale);
+
+    _objects.append(createWall(0.0f, 0.0f, gw, gs));
+    _objects.append(createWall(0.0f, 0.0f, gs, gh));
+    _objects.append(createWall(gw-gs, 0.0f, gs, gh));
+    _objects.append(createWall(0.0f, gh-gs, gw, gs));
+
+    _objects.append(createWall(gw*.0f, gh*.1f, gw*.8, gs*1));
+    _objects.append(createWall(gw*.2f, gh*.3f, gw*.8, gs*1));
+    _objects.append(createWall(gw*.0f, gh*.4f, gw*.3, gs*1));
+    _objects.append(createWall(gw*.0f, gh*.5f, gw*.8, gs*1));
+    _objects.append(createWall(gw*.0f, gh*.6f, gw*.3, gs*1));
+    _objects.append(createWall(gw*.2f, gh*.7f, gw*.8, gs*1));
+    _objects.append(createWall(gw*.0f, gh*.8f, gw*.8, gs*1));
+
+    _objects.append(createWall(gw*.4f, gh*.2f, gs*1, gh*.2));
+    _objects.append(createWall(gw*.6f, gh*.4f, gs*1, gh*.2));
+
+
+    _objects.append(createStar(b2Vec2(gw*.05, gh*.45), 1.5*gs));
+    _objects.append(createHole(b2Vec2(gw*.55, gh*.55), 1.5*gs));
+    _objects.append(createHole(b2Vec2(gw*.05, gh*.35), 1.5*gs));
+    _objects.append(createEnd(b2Vec2(gw*.55, gh*.25), 1.5*gs));
+    _objects.append(createBall(b2Vec2(gw*0.35, gh*0.55), 1.5*gs));
 }
 
 Object* Game::createWall(float x, float y, float w, float h, float angle) {
@@ -196,70 +213,32 @@ void Game::paintEvent(QPaintEvent *) {
     p.setRenderHint(QPainter::Antialiasing, true);
     p.setTransform(_transform);
 
-
-//    double mouseTx = qMax(0.0,18-qFabs(mouse.x()/10-18));
-
-//    double mouseTy = qMax(0.0, 32-qFabs(mouse.y()/10-32));
-//    qDebug() << mouseTy << " " << 32-qFabs(mouse.y()/10-32);
-
-//    double mouseTx1;
-//    if(mouse.x()/10==18){
-//        mouseTx1 = 0;
-//    }
-//    else
-//        mouseTx1 = (18-mouse.x()/10)/qFabs(18-mouse.x()/10)*1*mouseTx;
-
-//    double mouseTy1;
-//    if(mouse.y()/10==32){
-//        mouseTy1 = 00;
-//    }
-//    else
-//        mouseTy1 =(32-mouse.y()/10)/qFabs(32-mouse.y()/10)*1*mouseTy;
-
-//    qDebug() << mouseTy1 ;
-
-//        QLinearGradient linearGrad(
-//                    QPointF(18+mouseTx1, 32-mouseTy1),
-//                    QPointF(18-mouseTx1,32+mouseTy1));
-//        linearGrad.setColorAt(0, Qt::red);
-//        linearGrad.setColorAt(1, Qt::black);
-//
-//        p.fillRect(r, linearGrad);
-
-
     QPoint mouse = this->mapFromGlobal(QCursor::pos());
-    QRectF r(0, 0, 36, 64);
+    QRectF r(0, 0, gameWidth, gameHeight);
     if(isStmRunning){
-        QRadialGradient radialGrad(QPointF(18-stmPos.roll/90.0f*60.0f, 32-stmPos.pitch/90.0f*60.0f), 100);
+        QRadialGradient radialGrad(QPointF(gameWidth/2+stmPos.roll/90.0f*gameWidth*2,
+                                           gameHeight/2-stmPos.pitch/90.0f*gameHeight*2), 1000*gameScale);
         radialGrad.setColorAt(0, Qt::gray);
         radialGrad.setColorAt(1, Qt::black);
         p.fillRect(r, radialGrad);
     }
     else{
 
-        QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 100);
+        QRadialGradient radialGrad(QPointF(gameWidth-mouse.x()*gameScale,
+                                           gameHeight-mouse.y()*gameScale), 1000*gameScale);
         radialGrad.setColorAt(0, Qt::gray);
         radialGrad.setColorAt(1, Qt::black);
         p.fillRect(r, radialGrad);
     }
 
 
-//   else{
-
-//        QRectF r(0, 0, 36, 64);
-//        p.fillRect(r, QColor(0,0,0));
-//    }
-
-
-
-
     foreach(const Object* o, _objects) {
         switch(o->type) {
         case BallObject:
-            drawEllipse(&p, *o);
+            drawBall(&p, *o);
             break;
         case StarObject:
-            drawEllipse(&p, *o);
+            drawStar(&p, *o);
             break;
         case WallObject:
             drawWall(&p, *o);
@@ -268,7 +247,7 @@ void Game::paintEvent(QPaintEvent *) {
             drawHole(&p, *o);
             break;
         case EndObject:
-            drawHole(&p, *o);
+            drawEnd(&p, *o);
             break;
 
         }
@@ -285,6 +264,7 @@ void Game::drawWall(QPainter *p, const Object& o) {
     float hy = shape->m_vertices->y;
     QRectF r(x-hx, y-hy, 2*hx, 2*hy);
     p->setPen(QColor(36, 36, 36));
+    p->setBrush(QColor(36, 36, 36));
     p->save();
     p->translate(r.center());
     p->rotate(angle*180/b2_pi);
@@ -293,27 +273,27 @@ void Game::drawWall(QPainter *p, const Object& o) {
     p->restore();
 }
 
-void Game::drawEllipse(QPainter *p, const Object& o) {
+void Game::drawBall(QPainter *p, const Object& o) {
     float x = o.body->GetPosition().x;
     float y = o.body->GetPosition().y;
     float r = o.fixture->GetShape()->m_radius;
 
 
     QPoint mouse = this->mapFromGlobal(QCursor::pos());
-    QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 75);
-    radialGrad.setColorAt(0, QColor(179, 220, 242));
-    radialGrad.setColorAt(1, QColor(12, 22, 56));
-    p->setBrush(radialGrad);
 
     if(isStmRunning){
-         QRadialGradient radialGrad(QPointF(18-stmPos.roll/90.0f*60.0f, 32-stmPos.pitch/90.0f*60.0f), 100);
-        radialGrad.setColorAt(0, QColor(179, 220, 242));
+//         QRadialGradient radialGrad(QPointF(18-stmPos.roll/90.0f*60.0f, 32-stmPos.pitch/90.0f*60.0f), 100);
+         QRadialGradient radialGrad(QPointF(gameWidth/2+stmPos.roll/90.0f*gameWidth*2,
+                                            gameHeight/2-stmPos.pitch/90.0f*gameHeight*2), 500*gameScale);
+
+         radialGrad.setColorAt(0, QColor(179, 220, 242));
         radialGrad.setColorAt(1, QColor(12, 22, 56));
         p->setBrush(radialGrad);
     }
     else{
-        QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 75);
-        radialGrad.setColorAt(0, QColor(179, 220, 242));
+        QRadialGradient radialGrad(QPointF(gameWidth-mouse.x()*gameScale,
+                                           gameHeight-mouse.y()*gameScale), 500*gameScale);
+         radialGrad.setColorAt(0, QColor(179, 220, 242));
         radialGrad.setColorAt(1, QColor(12, 22, 56));
         p->setBrush(radialGrad);
     }
@@ -329,19 +309,89 @@ void Game::drawHole(QPainter *p, const Object& o) {
     float y = o.body->GetPosition().y;
     float r = o.fixture->GetShape()->m_radius;
 
-
     QPoint mouse = this->mapFromGlobal(QCursor::pos());
-    QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 75);
-    radialGrad.setColorAt(0, QColor(179, 220, 242));
-    radialGrad.setColorAt(1, QColor(12, 22, 56));
-    p->setBrush(QColor(255, 240, 105));
 
-
+    if(isStmRunning){
+        QRadialGradient radialGrad(QPointF(gameWidth/2+stmPos.roll/90.0f*gameWidth*2,
+                                           gameHeight/2-stmPos.pitch/90.0f*gameHeight*2), 700*gameScale);
+        radialGrad.setColorAt(0, QColor(11, 11, 11));
+        radialGrad.setColorAt(0.5, QColor(100, 100, 100));
+        radialGrad.setColorAt(1, QColor(11, 11, 11));
+        p->setBrush(radialGrad);
+    }
+    else{
+        QRadialGradient radialGrad(QPointF(gameWidth-mouse.x()*gameScale,
+                                           gameHeight-mouse.y()*gameScale), 700*gameScale);
+        radialGrad.setColorAt(0, QColor(11, 11, 11));
+        radialGrad.setColorAt(0.5, QColor(100, 100, 100));
+        radialGrad.setColorAt(1, QColor(11, 11, 11));
+        p->setBrush(radialGrad);
+    }
     QPen pen;
     pen.setWidth(0.2);
     p->setPen(pen);
     p->drawEllipse(QPointF(x, y), r, r);
 }
+
+
+void Game::drawStar(QPainter *p, const Object& o) {
+    float x = o.body->GetPosition().x;
+    float y = o.body->GetPosition().y;
+    float r = o.fixture->GetShape()->m_radius;
+
+    QPoint mouse = this->mapFromGlobal(QCursor::pos());
+
+    if(isStmRunning){
+        QRadialGradient radialGrad(QPointF(gameWidth/2+stmPos.roll/90.0f*gameWidth*2,
+                                           gameHeight/2-stmPos.pitch/90.0f*gameHeight*2), 700*gameScale);
+        radialGrad.setColorAt(0, QColor(11, 11, 11));
+        radialGrad.setColorAt(0.5, QColor(155, 140, 65));
+        radialGrad.setColorAt(1, QColor(11, 11, 11));
+        p->setBrush(radialGrad);
+    }
+    else{
+        QRadialGradient radialGrad(QPointF(gameWidth-mouse.x()*gameScale,
+                                           gameHeight-mouse.y()*gameScale), 700*gameScale);
+        radialGrad.setColorAt(0, QColor(11, 11, 11));
+        radialGrad.setColorAt(0.5, QColor(155, 140, 65));
+        radialGrad.setColorAt(1, QColor(11, 11, 11));
+        p->setBrush(radialGrad);
+    }
+    QPen pen;
+    pen.setWidth(0.2);
+    p->setPen(pen);
+    p->drawEllipse(QPointF(x, y), r, r);
+}
+
+void Game::drawEnd(QPainter *p, const Object& o) {
+    float x = o.body->GetPosition().x;
+    float y = o.body->GetPosition().y;
+    float r = o.fixture->GetShape()->m_radius;
+
+    QPoint mouse = this->mapFromGlobal(QCursor::pos());
+
+    if(isStmRunning){
+        QRadialGradient radialGrad(QPointF(gameWidth/2+stmPos.roll/90.0f*gameWidth*2,
+                                           gameHeight/2-stmPos.pitch/90.0f*gameHeight*2), 700*gameScale);
+        radialGrad.setColorAt(0, QColor(225, 11, 11));
+        radialGrad.setColorAt(0.5, QColor(245, 100, 100));
+        radialGrad.setColorAt(1, QColor(225, 11, 11));
+        p->setBrush(radialGrad);
+    }
+    else{
+        QRadialGradient radialGrad(QPointF(gameWidth-mouse.x()*gameScale,
+                                           gameHeight-mouse.y()*gameScale), 700*gameScale);
+        radialGrad.setColorAt(0, QColor(225, 11, 11));
+        radialGrad.setColorAt(0.5, QColor(245, 100, 100));
+        radialGrad.setColorAt(1, QColor(225, 11, 11));
+        p->setBrush(radialGrad);
+    }
+    QPen pen;
+    pen.setWidth(0.2);
+    p->setPen(pen);
+    p->drawEllipse(QPointF(x, y), r, r);
+}
+
 
 void Game::start() {
     if(!_timerId) {
@@ -360,11 +410,23 @@ void Game::deleteObjects(){
 
 }
 
-void Game::control(){
-    QPoint p = this->mapFromGlobal(QCursor::pos());
-    _world->SetGravity(b2Vec2(qMin((p.x()-180)/18, 10), -qMin((p.y()-320)/32, 10)));
-
+void Game::deleteAllObjects(){
+    if(isReset){
+        QMutableVectorIterator<Object*> i(_objects);
+        while (i.hasNext()) {
+            if (i.next()->type != -1){
+                _world->DestroyBody(i.value()->body);
+                i.remove();
+            }
+            else{
+                qDebug() << i.value()->type;
+            }
+        }
+        resetGame();
+        isReset = 0;
+    }
 }
+
 
 void Game::timerEvent(QTimerEvent *event) {
     if(event->timerId() == _timerId) {
@@ -372,6 +434,7 @@ void Game::timerEvent(QTimerEvent *event) {
 
             _world->Step(1.0f/60.0f, 8, 6);
             deleteObjects();
+            deleteAllObjects();
             if(isStmRunning)
                 controlStm();
             else
@@ -434,8 +497,15 @@ void Game::on_data_stm(QString line){
     }
 }
 
+void Game::control(){
+    QPoint p = this->mapFromGlobal(QCursor::pos());
+    _world->SetGravity(b2Vec2((p.x()*gameScale-gameWidth/2)/(gameWidth)*200*gameScale,
+                              (p.y()*gameScale-gameHeight/2)/(gameHeight)*200*gameScale));
+}
+
 void Game::controlStm(){
-        _world->SetGravity(b2Vec2(stmPos.roll, stmPos.pitch));
+        _world->SetGravity(b2Vec2(-stmPos.roll*10*gameScale,
+                                  stmPos.pitch*10*gameScale));
 
 }
 
@@ -443,3 +513,4 @@ void Game::on_is_stm(int isStm){
     qDebug() << isStm;
     isStmRunning = isStm;
 }
+

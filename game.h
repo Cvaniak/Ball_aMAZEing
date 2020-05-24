@@ -42,31 +42,42 @@ public:
 
     explicit Game(QWidget *view, QWidget *parent = nullptr);
     virtual ~Game(){};
+
+    void resetGame();
+
+    Object* createWall(float x, float y, float w, float h, float angle=0);
     Object* createBall(const b2Vec2& pos, float radius);
     Object* createStar(const b2Vec2& pos, float radius);
-    Object* createWall(float x, float y, float w, float h, float angle=0);
     Object* createHole(const b2Vec2& pos, float radius);
     Object* createEnd(const b2Vec2& pos, float radius);
 
     void paintEvent(QPaintEvent *) override;
 
     void drawWall(QPainter *p, const Object& o);
-    void drawEllipse(QPainter *p, const Object& o);
+    void drawBall(QPainter *p, const Object& o);
     void drawHole(QPainter *p, const Object& o);
+    void drawStar(QPainter *p, const Object& o);
+    void drawEnd(QPainter *p, const Object& o);
 
     void deleteObjects();
+    void deleteAllObjects();
     void control();
     void controlStm();
 
     void start();
     void timerEvent(QTimerEvent *event) override;
     int points;
+    int level;
     int isRunning;
+    int isReset;
     int isStmRunning;
+    float gameWidth;
+    float gameHeight;
+    float gameStroke;
+    float gameScale;
     StmPos stmPos;
 
 private:
-//    b2World *_world;
     std::shared_ptr<b2World> _world;
     int _timerId;
     QTransform _transform;
@@ -85,6 +96,7 @@ private slots:
 
 signals:
      void mouseClicked();
+     void setPoints(int points, int addSet);
 //     void on_star_collect();
 //     void on_hole_collect();
 //     void on_end_collect();
