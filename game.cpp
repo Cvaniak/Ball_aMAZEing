@@ -9,8 +9,10 @@ Game::Game(QWidget *viewT, QWidget* parent):QWidget(parent), _timerId(0)
     b2Vec2 gravity(0.0f, -10.0f);
     view = viewT;
     points = 0;
-    isRunning = 1;
+    isRunning = 0;
     isStmRunning = 0;
+    stmPos.roll = 0;
+    stmPos.pitch = 0;
 //        _world = new b2World(gravity);
     _world = std::make_shared<b2World>(gravity);
 
@@ -195,8 +197,6 @@ void Game::paintEvent(QPaintEvent *) {
     p.setTransform(_transform);
 
 
-    QPoint mouse = this->mapFromGlobal(QCursor::pos());
-
 //    double mouseTx = qMax(0.0,18-qFabs(mouse.x()/10-18));
 
 //    double mouseTy = qMax(0.0, 32-qFabs(mouse.y()/10-32));
@@ -225,12 +225,25 @@ void Game::paintEvent(QPaintEvent *) {
 //        linearGrad.setColorAt(1, Qt::black);
 //
 //        p.fillRect(r, linearGrad);
-    QRectF r(0, 0, 36, 64);
-    QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 100);
 
-    radialGrad.setColorAt(0, Qt::gray);
-    radialGrad.setColorAt(1, Qt::black);
-    p.fillRect(r, radialGrad);
+
+    QPoint mouse = this->mapFromGlobal(QCursor::pos());
+    QRectF r(0, 0, 36, 64);
+    if(isStmRunning){
+        qDebug() << stmPos.roll/90.0f*18.0f << stmPos.pitch/90.0f*18.0f;
+        QRadialGradient radialGrad(QPointF(18-stmPos.roll/90.0f*60.0f, 32-stmPos.pitch/90.0f*60.0f), 100);
+        radialGrad.setColorAt(0, Qt::gray);
+        radialGrad.setColorAt(1, Qt::black);
+        p.fillRect(r, radialGrad);
+    }
+    else{
+
+        QRadialGradient radialGrad(QPointF(36-mouse.x()/10, mouse.y()/10), 100);
+        radialGrad.setColorAt(0, Qt::gray);
+        radialGrad.setColorAt(1, Qt::black);
+        p.fillRect(r, radialGrad);
+    }
+
 
 //   else{
 
@@ -348,9 +361,10 @@ void Game::timerEvent(QTimerEvent *event) {
 
             _world->Step(1.0f/60.0f, 8, 6);
             deleteObjects();
-            if(!isStmRunning)
+            if(isStmRunning)
+                controlStm();
+            else
                 control();
-
         }
         // Remove all numbers < 0 from QVector<int>
         update();
@@ -399,9 +413,8 @@ void Game::on_data_stm(QString line){
 //        qDebug() << x << y << z;
         float Roll = atan2(y, z) * 180/M_PI;
         float Pitch = atan2(-x, sqrt(y*y + z*z)) * 180/M_PI;
-        float roll =  (Roll);
-        float pitch = (Pitch);
-        controlStm(roll, pitch);
+        stmPos.roll = Roll;
+        stmPos.pitch = Pitch;
 
 //        qDebug() << "RP" << roll << pitch;
     }
@@ -410,11 +423,9 @@ void Game::on_data_stm(QString line){
     }
 }
 
-void Game::controlStm(float roll, float pitch){
-    if(isStmRunning){
-        _world->SetGravity(b2Vec2(roll, pitch));
+void Game::controlStm(){
+        _world->SetGravity(b2Vec2(stmPos.roll, stmPos.pitch));
 
-    }
 }
 
 void Game::on_is_stm(int isStm){

@@ -29,6 +29,12 @@ struct Object
 
 };
 
+struct StmPos
+{
+    int pitch;
+    int roll;
+};
+
 class Game : public QWidget
 {
     Q_OBJECT
@@ -50,13 +56,14 @@ public:
 
     void deleteObjects();
     void control();
-    void controlStm(float roll, float pitch);
+    void controlStm();
 
     void start();
     void timerEvent(QTimerEvent *event) override;
     int points;
     int isRunning;
     int isStmRunning;
+    StmPos stmPos;
 
 private:
 //    b2World *_world;
