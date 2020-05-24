@@ -13,41 +13,39 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="bConnect">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>340</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>bConnect</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="wGame" native="true">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>640</width>
-      <height>640</height>
+      <width>641</width>
+      <height>661</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="bStartStop">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>250</y>
+      <x>670</x>
+      <y>140</y>
       <width>201</width>
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Karumbi</family>
+      <pointsize>45</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
-     <string>Resume</string>
+     <string>Pause</string>
     </property>
    </widget>
    <widget class="QLabel" name="lPoints">
@@ -134,13 +132,16 @@
      <string>0</string>
     </property>
    </widget>
-   <zorder>wGame</zorder>
-   <zorder>bConnect</zorder>
-   <zorder>bStartStop</zorder>
-   <zorder>lPoints</zorder>
-   <zorder>lPointsText</zorder>
-   <zorder>lLevelText</zorder>
-   <zorder>lLevel</zorder>
+   <widget class="QWidget" name="wConnect" native="true">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>210</y>
+      <width>201</width>
+      <height>180</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

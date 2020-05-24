@@ -27,6 +27,9 @@ private:
     QSerialPort *device;
 
     void addToLogs(QString message);
+signals:
+    void dataStm(QString stm);
+    void isStmConnected(int isStm);
 };
 
 #endif // COMPORT_H

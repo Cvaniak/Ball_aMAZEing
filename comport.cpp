@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QString>
+#include <QtMath>
 
 ComPort::ComPort(QWidget *parent) :
     QWidget(parent),
@@ -13,6 +14,8 @@ ComPort::ComPort(QWidget *parent) :
 {
     ui->setupUi(this);
     this->device = new QSerialPort(this);
+
+
 }
 
 ComPort::~ComPort()
@@ -54,6 +57,7 @@ void ComPort::on_bConnect_clicked()
           connect(this->device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
 
           this->addToLogs("Otwarto port szeregowy.");
+          emit isStmConnected(1);
         } else {
           this->addToLogs("Otwarcie porty szeregowego się nie powiodło!");
         }
@@ -69,6 +73,7 @@ void ComPort::on_bDisconnect_clicked()
     if(this->device->isOpen()) {
       this->device->close();
       this->addToLogs("Zamknięto połączenie.");
+      emit isStmConnected(0);
     } else {
       this->addToLogs("Port nie jest otwarty!");
       return;
@@ -83,12 +88,13 @@ void ComPort::addToLogs(QString message){
 void ComPort::readFromPort() {
   while(this->device->canReadLine()) {
     QString line = this->device->readLine();
-    //qDebug() << line;
 
-    QString terminator = "\r";
+    emit dataStm(line);
+//    qDebug() << "comport " <<  line;
+    QString terminator = "\r";;
     int pos = line.lastIndexOf(terminator);
-    //qDebug() << line.left(pos);
-
     this->addToLogs(line.left(pos));
+//    this->addToLogs(list.at(1));
+
   }
 }

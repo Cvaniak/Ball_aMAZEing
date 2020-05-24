@@ -14,10 +14,23 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    game = new Game(this);
+    game = new Game(this, ui->wGame);
+
 
     game->resize(360, 640);
+//    game->setParent();
     game->start();
+
+    comport = new ComPort(ui->wConnect);
+//    comport->setParent(ui->wConnect);
+//    ui->wConnect = comport;
+
+    QObject::connect(comport,SIGNAL(dataStm(QString)),this,SLOT(on_data_stm(QString)));
+    QObject::connect(this,SIGNAL(dataStm(QString)),game,SLOT(on_data_stm(QString)));
+
+    QObject::connect(comport,SIGNAL(isStmConnected(int)),this,SLOT(on_is_stm(int)));
+    QObject::connect(this,SIGNAL(isStmConnected(int)),game,SLOT(on_is_stm(int)));
+
 //    game1->setGeometry(50,50,300,400);
 //    game->show();
 //    ui->wGame = game;
@@ -34,7 +47,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_bConnect_clicked()
 {
-    comport.show();
+
+
 }
 
 
@@ -52,4 +66,47 @@ void MainWindow::on_hole_collect(){
 void MainWindow::on_end_collect(){
     qDebug() << "You win " ;
 
+}
+
+void MainWindow::start_stop(int should = 2){
+    if(should == 0){
+        game->isRunning = 0;
+        ui->bStartStop->setText("Resume");
+    }
+    else if(should == 1){
+        game->isRunning = 1;
+        ui->bStartStop->setText("Pause");
+    }
+    else{
+        if(game->isRunning == 1){
+            game->isRunning = 0;
+            ui->bStartStop->setText("Resume");
+        }
+        else{
+            game->isRunning = 1;
+            ui->bStartStop->setText("Pause");
+        }
+    }
+}
+
+void MainWindow::on_bStartStop_clicked()
+{
+   start_stop();
+}
+
+void MainWindow::stop_game()
+{
+   start_stop(0);
+}
+
+
+void MainWindow::on_data_stm(QString stm){
+//    qDebug() << stm;
+    emit dataStm(stm);
+}
+
+void MainWindow::on_is_stm(int isStm){
+//    qDebug() << isStm;
+    stop_game();
+    emit isStmConnected(isStm);
 }

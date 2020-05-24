@@ -34,7 +34,7 @@ class Game : public QWidget
     Q_OBJECT
 public:
 
-    explicit Game(QWidget *parent = nullptr);
+    explicit Game(QWidget *view, QWidget *parent = nullptr);
     virtual ~Game(){};
     Object* createBall(const b2Vec2& pos, float radius);
     Object* createStar(const b2Vec2& pos, float radius);
@@ -48,9 +48,15 @@ public:
     void drawEllipse(QPainter *p, const Object& o);
     void drawHole(QPainter *p, const Object& o);
 
+    void deleteObjects();
+    void control();
+    void controlStm(float roll, float pitch);
+
     void start();
     void timerEvent(QTimerEvent *event) override;
     int points;
+    int isRunning;
+    int isStmRunning;
 
 private:
 //    b2World *_world;
@@ -59,12 +65,19 @@ private:
     QTransform _transform;
     QVector<Object*> _objects;
     QWidget *view;
+
 //    MContactListener contactListener;
 
 protected:
      void keyPressEvent(QKeyEvent *event) override;
+     void mousePressEvent(QMouseEvent *event) override;
 
 private slots:
+     void on_data_stm(QString line);
+     void on_is_stm(int isStm);
+
+signals:
+     void mouseClicked();
 //     void on_star_collect();
 //     void on_hole_collect();
 //     void on_end_collect();

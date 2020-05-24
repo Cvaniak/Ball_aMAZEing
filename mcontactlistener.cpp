@@ -71,9 +71,10 @@ void MContactListener::PreSolve(b2Contact* contact,
 
 void MContactListener::PostSolve(b2Contact* contact,
   const b2ContactImpulse* impulse) {
-    Object *a = (Object *)contact->GetFixtureA()->GetBody()->GetUserData();
-    Object *b = (Object *)contact->GetFixtureB()->GetBody()->GetUserData();
-    qDebug() << a->type<< " " << b->type;
+//    Object *a = (Object *)contact->GetFixtureA()->GetBody()->GetUserData();
+//    Object *b = (Object *)contact->GetFixtureB()->GetBody()->GetUserData();
+//    qDebug() << a->type<< " " << b->type;
+
 //    if(a->type == StarObject && b->type==BallObject){
 ////        b->body->GetWorld()->DestroyBody(b->body);
 //        a->shouldDie = true;

@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void start_stop(int should);
 
 private slots:
 
@@ -24,12 +25,22 @@ private slots:
     void on_star_collect();
     void on_hole_collect();
     void on_end_collect();
+    void on_data_stm(QString stm);
+    void on_is_stm(int isStm);
+
+    void on_bStartStop_clicked();
+    void stop_game();
+//    void on_mouse_clicked();
 
 private:
     Ui::MainWindow *ui;
-    ComPort comport;
+    ComPort *comport;
     Game *game;
 //    Game *game;
+
+signals:
+    void dataStm(QString stm);
+    void isStmConnected(int isStm);
 
 };
 #endif // MAINWINDOW_H

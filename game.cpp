@@ -4,11 +4,13 @@
 #include "mcontactlistener.h"
 
 
-Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
+Game::Game(QWidget *viewT, QWidget* parent):QWidget(parent), _timerId(0)
 {
     b2Vec2 gravity(0.0f, -10.0f);
-    view = parent;
+    view = viewT;
     points = 0;
+    isRunning = 1;
+    isStmRunning = 0;
 //        _world = new b2World(gravity);
     _world = std::make_shared<b2World>(gravity);
 
@@ -18,7 +20,7 @@ Game::Game(QWidget *parent):QWidget(parent), _timerId(0)
     QObject::connect(contactListener,SIGNAL(star_collect()),view,SLOT(on_star_collect()));
     QObject::connect(contactListener,SIGNAL(hole_collect()),view,SLOT(on_hole_collect()));
     QObject::connect(contactListener,SIGNAL(end_collect()),view,SLOT(on_end_collect()));
-
+    QObject::connect(this,SIGNAL(mouseClicked()),view,SLOT(on_bStartStop_clicked()));
 
 
     for(int i=0; i<1; i++) {
@@ -322,35 +324,36 @@ void Game::start() {
         _timerId = startTimer(1000/60); // 60fps
     }
 }
+
+void Game::deleteObjects(){
+    QMutableVectorIterator<Object*> i(_objects);
+    while (i.hasNext()) {
+        if (i.next()->shouldDie == true){
+            _world->DestroyBody(i.value()->body);
+            i.remove();
+        }
+    }
+
+}
+
+void Game::control(){
+    QPoint p = this->mapFromGlobal(QCursor::pos());
+    _world->SetGravity(b2Vec2(qMin((p.x()-180)/18, 10), -qMin((p.y()-320)/32, 10)));
+
+}
+
 void Game::timerEvent(QTimerEvent *event) {
     if(event->timerId() == _timerId) {
-        _world->Step(1.0f/60.0f, 8, 6);
-        update();
-        QPoint p = this->mapFromGlobal(QCursor::pos());
-//            qDebug() << contactListener->x << endl;
-//
-//        foreach(const Object& o, _objects) {
+        if(isRunning){
 
-//            if(o.type == StarObject){
-//                o.body = nullptr;
-//            }
+            _world->Step(1.0f/60.0f, 8, 6);
+            deleteObjects();
+            if(!isStmRunning)
+                control();
 
-//        }
-
-        // Remove all numbers < 0 from QVector<int>
-        QMutableVectorIterator<Object*> i(_objects);
-        while (i.hasNext()) {
-            if (i.next()->shouldDie == true){
-//                i.value()->shouldDie = true;
-                _world->DestroyBody(i.value()->body);
-
-                i.remove();
-            }
-//                i.value().type = WallObject;
         }
-
-
-        _world->SetGravity(b2Vec2(qMin((p.x()-180)/18, 10), -qMin((p.y()-320)/32, 10)));
+        // Remove all numbers < 0 from QVector<int>
+        update();
     }
     else{
 //            qDebug() << event->timerId() << endl;
@@ -377,4 +380,44 @@ void Game::keyPressEvent(QKeyEvent *event)
         gravity += b2Vec2(0.0f, 10.0f);
     }
     _world->SetGravity(gravity);
+}
+
+void Game::mousePressEvent(QMouseEvent *event){
+//    qDebug() << "yo";
+    emit mouseClicked();
+}
+
+void Game::on_data_stm(QString line){
+
+    QRegExp rx("[ ]");// match a comma or a space
+    QStringList list = line.split(rx, QString::SkipEmptyParts);
+
+    if(list.at(0) == "X"){
+        qint16 x = list.at(1).toInt();
+        qint16 y = list.at(2).toInt();
+        qint16 z = list.at(3).toInt();
+//        qDebug() << x << y << z;
+        float Roll = atan2(y, z) * 180/M_PI;
+        float Pitch = atan2(-x, sqrt(y*y + z*z)) * 180/M_PI;
+        float roll =  (Roll);
+        float pitch = (Pitch);
+        controlStm(roll, pitch);
+
+//        qDebug() << "RP" << roll << pitch;
+    }
+    else if(list.at(0) == "Y"){
+        emit mouseClicked();
+    }
+}
+
+void Game::controlStm(float roll, float pitch){
+    if(isStmRunning){
+        _world->SetGravity(b2Vec2(roll, pitch));
+
+    }
+}
+
+void Game::on_is_stm(int isStm){
+    qDebug() << isStm;
+    isStmRunning = isStm;
 }
