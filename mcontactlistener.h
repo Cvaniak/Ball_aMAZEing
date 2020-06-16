@@ -3,8 +3,6 @@
 
 #include <box2d.h>
 #include <QWidget>
-//#include <QtWidgets>
-//#include <QtCore/QObject>
 #include "game.h"
 
 /**
@@ -13,8 +11,6 @@
 class MContactListener : public QWidget, public b2ContactListener{
     Q_OBJECT
 public:
-//    std::vector<MContact> _contacts;
-
     /**
      * @brief MContactListener constructor
      * @param parent
@@ -22,19 +18,27 @@ public:
     explicit MContactListener(QWidget *parent = nullptr);
     /**
      * @brief MContactListener destructor
-     * @param parent
      */
     virtual ~MContactListener(){};
-      virtual void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
-    virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
-    void addStar(int starId);
-    void setPlayer(int playerId);
-    double x;
-    int _player;
-    QVector<int> _stars;
+    /**
+     * @brief PreSolve disable conntact if collison with collectable obeject and emit signal
+     * @param contact
+     * @param oldManifold
+     */
+    virtual void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
+
 signals:
+    /**
+     * @brief Signal after collison with star
+     */
     void star_collect();
+    /**
+     * @brief Signal after collison with hole
+     */
     void hole_collect();
+    /**
+     * @brief Signal after collison with end
+     */
     void end_collect();
 };
 

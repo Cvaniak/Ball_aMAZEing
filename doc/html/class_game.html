@@ -292,8 +292,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Constructor for game window. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="class_main_window.html" title="App MainWidow. ">MainWindow</a></td><td>pointer </td></tr>
-    <tr><td class="paramname">Ui</td><td>Widget pointer for game window </td></tr>
+    <tr><td class="paramname">view</td><td><a class="el" href="class_main_window.html" title="App MainWidow. ">MainWindow</a> pointer </td></tr>
+    <tr><td class="paramname">parent</td><td>Ui Widget pointer for game window </td></tr>
   </table>
   </dd>
 </dl>
@@ -330,8 +330,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Create Ball object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Box2D</td><td>vector with x and y position in pixels </td></tr>
-    <tr><td class="paramname">size</td><td>of circle (radius) in pixels </td></tr>
+    <tr><td class="paramname">pos</td><td>Box2D vector with x and y position in pixels </td></tr>
+    <tr><td class="paramname">radius</td><td>size of circle (radius) in pixels </td></tr>
   </table>
   </dd>
 </dl>
@@ -368,8 +368,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Create End object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Box2D</td><td>vector with x and y position in pixels </td></tr>
-    <tr><td class="paramname">size</td><td>of circle (radius) in pixels </td></tr>
+    <tr><td class="paramname">pos</td><td>Box2D vector with x and y position in pixels </td></tr>
+    <tr><td class="paramname">radius</td><td>size of circle (radius) in pixels </td></tr>
   </table>
   </dd>
 </dl>
@@ -406,8 +406,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Create Hole object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Box2D</td><td>vector with x and y position in pixels </td></tr>
-    <tr><td class="paramname">size</td><td>of circle (radius) in pixels </td></tr>
+    <tr><td class="paramname">pos</td><td>Box2D vector with x and y position in pixels </td></tr>
+    <tr><td class="paramname">radius</td><td>size of circle (radius) in pixels </td></tr>
   </table>
   </dd>
 </dl>
@@ -444,8 +444,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Create Star object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Box2D</td><td>vector with x and y position in pixels </td></tr>
-    <tr><td class="paramname">size</td><td>of circle (radius) in pixels </td></tr>
+    <tr><td class="paramname">pos</td><td>Box2D vector with x and y position in pixels </td></tr>
+    <tr><td class="paramname">radius</td><td>size of circle (radius) in pixels </td></tr>
   </table>
   </dd>
 </dl>
@@ -502,8 +502,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
   <table class="params">
     <tr><td class="paramname">x</td><td>poistion in pixels </td></tr>
     <tr><td class="paramname">y</td><td>poistion in pixels </td></tr>
-    <tr><td class="paramname">width</td><td>in pixels </td></tr>
-    <tr><td class="paramname">height</td><td>in pixels </td></tr>
+    <tr><td class="paramname">w</td><td>width in pixels </td></tr>
+    <tr><td class="paramname">h</td><td>height in pixels </td></tr>
     <tr><td class="paramname">angle</td><td>in degres </td></tr>
   </table>
   </dd>
@@ -541,8 +541,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Defines how to draw Ball. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">QPainter</td><td>canvas pointer </td></tr>
-    <tr><td class="paramname"><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a></td><td>to draw </td></tr>
+    <tr><td class="paramname">p</td><td>QPainter canvas pointer </td></tr>
+    <tr><td class="paramname">o</td><td><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a> to draw </td></tr>
   </table>
   </dd>
 </dl>
@@ -578,8 +578,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Defines how to draw End. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">QPainter</td><td>canvas pointer </td></tr>
-    <tr><td class="paramname"><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a></td><td>to draw </td></tr>
+    <tr><td class="paramname">p</td><td>QPainter canvas pointer </td></tr>
+    <tr><td class="paramname">o</td><td><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a> to draw </td></tr>
   </table>
   </dd>
 </dl>
@@ -615,8 +615,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Defines how to draw Hole. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">QPainter</td><td>canvas pointer </td></tr>
-    <tr><td class="paramname"><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a></td><td>to draw </td></tr>
+    <tr><td class="paramname">p</td><td>QPainter canvas pointer </td></tr>
+    <tr><td class="paramname">o</td><td><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a> to draw </td></tr>
   </table>
   </dd>
 </dl>
@@ -652,8 +652,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Defines how to draw Star. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">QPainter</td><td>canvas pointer </td></tr>
-    <tr><td class="paramname"><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a></td><td>to draw </td></tr>
+    <tr><td class="paramname">p</td><td>QPainter canvas pointer </td></tr>
+    <tr><td class="paramname">o</td><td><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a> to draw </td></tr>
   </table>
   </dd>
 </dl>
@@ -689,8 +689,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Defines how to draw Wall. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">QPainter</td><td>canvas pointer </td></tr>
-    <tr><td class="paramname"><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a></td><td>to draw </td></tr>
+    <tr><td class="paramname">p</td><td>QPainter canvas pointer </td></tr>
+    <tr><td class="paramname">o</td><td><a class="el" href="struct_object.html" title="Struct for handling diffrent kind of object in game. ">Object</a> to draw </td></tr>
   </table>
   </dd>
 </dl>
@@ -792,7 +792,7 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Recieve emited data from MC. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Line</td><td>of input data </td></tr>
+    <tr><td class="paramname">line</td><td>of input data </td></tr>
   </table>
   </dd>
 </dl>
@@ -826,7 +826,7 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Setup control for mouse or MC. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Is</td><td>MC connected or not </td></tr>
+    <tr><td class="paramname">isStm</td><td>Is MC connected or not </td></tr>
   </table>
   </dd>
 </dl>
@@ -870,8 +870,8 @@ QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Emit info about points event. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Number</td><td>of points </td></tr>
-    <tr><td class="paramname">Add</td><td>or set mode </td></tr>
+    <tr><td class="paramname">points</td><td>Number of points </td></tr>
+    <tr><td class="paramname">addSet</td><td>Add or set mode </td></tr>
   </table>
   </dd>
 </dl>

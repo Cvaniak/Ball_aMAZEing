@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['stmpos',['stmPos',['../class_game.html#a1224d3e41bf822b043f1c2af88b0f7a7',1,'Game']]]
+  ['pitch',['pitch',['../struct_stm_pos.html#ad9bd7b2d7e5b1dde1f971ca50dcac419',1,'StmPos']]],
+  ['points',['points',['../class_game.html#a3d3e4d68aca0adb6422ea5799cf5ec18',1,'Game']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['points',['points',['../class_game.html#a3d3e4d68aca0adb6422ea5799cf5ec18',1,'Game']]]
+  ['level',['level',['../class_game.html#abe14118bc7cb70c342636c2b2a15554b',1,'Game']]]
 ];

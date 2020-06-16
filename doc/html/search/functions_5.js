@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isstmconnected',['isStmConnected',['../class_com_port.html#ab99fa935131bb997ab24a4ba92abf0a0',1,'ComPort::isStmConnected()'],['../class_main_window.html#a398c657a045bd8b80721a6ad52c4d311',1,'MainWindow::isStmConnected()']]]
+  ['game',['Game',['../class_game.html#a8b26c9a1347bfd8843745f7e176e8397',1,'Game']]]
 ];

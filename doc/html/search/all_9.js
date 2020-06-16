@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['mainwindow',['MainWindow',['../class_main_window.html',1,'MainWindow'],['../class_main_window.html#a996c5a2b6f77944776856f08ec30858d',1,'MainWindow::MainWindow()']]],
-  ['mcontactlistener',['MContactListener',['../class_m_contact_listener.html',1,'MContactListener'],['../class_m_contact_listener.html#a96afb5dc4b2bdc8d7bfcb84d644e0084',1,'MContactListener::MContactListener()']]],
-  ['mouseclicked',['mouseClicked',['../class_game.html#a5074c34406d022ace111c8d1746e306b',1,'Game']]],
-  ['mousepressevent',['mousePressEvent',['../class_game.html#a9f6de718ac1bf593bbb45bf9d313323c',1,'Game']]]
+  ['isreset',['isReset',['../class_game.html#aca396d90c23573ad747e80a722fdfc86',1,'Game']]],
+  ['isrunning',['isRunning',['../class_game.html#aa3a7c0a7c2b266828664a1f644116df0',1,'Game']]],
+  ['isstmconnected',['isStmConnected',['../class_com_port.html#ab99fa935131bb997ab24a4ba92abf0a0',1,'ComPort::isStmConnected()'],['../class_main_window.html#a398c657a045bd8b80721a6ad52c4d311',1,'MainWindow::isStmConnected()']]],
+  ['isstmrunning',['isStmRunning',['../class_game.html#aea0673ef453b11e487a3e1de38b9def8',1,'Game']]]
 ];

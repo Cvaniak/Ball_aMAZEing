@@ -6,8 +6,6 @@
 #include <QWidget>
 #include <QtCore/QObject>
 #include "game.h"
-//#include "mainwindow.h"
-//#include "mcontactlistener.h"
 
 /**
  * @brief The Bubble class that shows orintation of game plane. Based on game class and need refactor/rebuild
@@ -75,9 +73,6 @@ private slots:
 signals:
      void mouseClicked();
      void setPoints(int points, int addSet);
-//     void on_star_collect();
-//     void on_hole_collect();
-//     void on_end_collect();
 };
 
 #endif // Bubble_H

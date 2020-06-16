@@ -299,7 +299,7 @@ void Game::drawBall(QPainter *p, const Object& o) {
     }
 
     QPen pen;
-    pen.setWidth(0.2);
+    pen.setWidth(0);
     p->setPen(pen);
     p->drawEllipse(QPointF(x, y), r, r);
 }
@@ -328,7 +328,7 @@ void Game::drawHole(QPainter *p, const Object& o) {
         p->setBrush(radialGrad);
     }
     QPen pen;
-    pen.setWidth(0.2);
+    pen.setWidth(0);
     p->setPen(pen);
     p->drawEllipse(QPointF(x, y), r, r);
 }
@@ -358,7 +358,7 @@ void Game::drawStar(QPainter *p, const Object& o) {
         p->setBrush(radialGrad);
     }
     QPen pen;
-    pen.setWidth(0.2);
+    pen.setWidth(0);
     p->setPen(pen);
     p->drawEllipse(QPointF(x, y), r, r);
 }
@@ -387,7 +387,7 @@ void Game::drawEnd(QPainter *p, const Object& o) {
         p->setBrush(radialGrad);
     }
     QPen pen;
-    pen.setWidth(0.2);
+    pen.setWidth(0);
     p->setPen(pen);
     p->drawEllipse(QPointF(x, y), r, r);
 }

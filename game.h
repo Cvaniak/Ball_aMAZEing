@@ -15,16 +15,28 @@ enum {
     StarObject,
     HoleObject,
     EndObject,
-} Objects;
+};
 
 /**
  * @brief Struct for handling diffrent kind of object in game
  */
 struct Object
 {
+    /**
+     * @brief Type of object
+     */
     int type;
+    /**
+     * @brief Box2D object
+     */
     b2Body *body;
+    /**
+     * @brief Fixture from Box2D
+     */
     b2Fixture *fixture;
+    /**
+     * @brief Should Die indicate for game loop to handle destrtuction
+     */
     bool shouldDie;
 
 };
@@ -33,7 +45,13 @@ struct Object
  */
 struct StmPos
 {
+    /**
+     * @brief pitch value in degres
+     */
     int pitch;
+    /**
+     * @brief roll value in degres
+     */
     int roll;
 };
 
@@ -46,8 +64,8 @@ class Game : public QWidget
 public:
     /**
      * @brief Constructor for game window
-     * @param MainWindow pointer
-     * @param Ui Widget pointer for game window
+     * @param view MainWindow pointer
+     * @param parent Ui Widget pointer for game window
      */
     explicit Game(QWidget *view, QWidget *parent = nullptr);
     virtual ~Game(){};
@@ -61,37 +79,37 @@ public:
      * @brief Create wall
      * @param x poistion in pixels
      * @param y poistion in pixels
-     * @param width in pixels
-     * @param height in pixels
+     * @param w width in pixels
+     * @param h height in pixels
      * @param angle in degres
      * @return Custom data struct with Box2D and QPainter object
      */
     Object* createWall(float x, float y, float w, float h, float angle=0);
     /**
      * @brief Create Ball object
-     * @param Box2D vector with x and y position in pixels
-     * @param size of circle (radius) in pixels
+     * @param pos Box2D vector with x and y position in pixels
+     * @param radius size of circle (radius) in pixels
      * @return
      */
     Object* createBall(const b2Vec2& pos, float radius);
     /**
      * @brief Create Star object
-     * @param Box2D vector with x and y position in pixels
-     * @param size of circle (radius) in pixels
+     * @param pos Box2D vector with x and y position in pixels
+     * @param radius size of circle (radius) in pixels
      * @return
      */
     Object* createStar(const b2Vec2& pos, float radius);
     /**
      * @brief Create Hole object
-     * @param Box2D vector with x and y position in pixels
-     * @param size of circle (radius) in pixels
+     * @param pos Box2D vector with x and y position in pixels
+     * @param radius size of circle (radius) in pixels
      * @return
      */
     Object* createHole(const b2Vec2& pos, float radius);
     /**
      * @brief Create End object
-     * @param Box2D vector with x and y position in pixels
-     * @param size of circle (radius) in pixels
+     * @param pos Box2D vector with x and y position in pixels
+     * @param radius size of circle (radius) in pixels
      * @return
      */
     Object* createEnd(const b2Vec2& pos, float radius);
@@ -103,32 +121,32 @@ public:
 
     /**
      * @brief Defines how to draw Wall
-     * @param QPainter canvas pointer
-     * @param Object to draw
+     * @param p QPainter canvas pointer
+     * @param o Object to draw
      */
     void drawWall(QPainter *p, const Object& o);
     /**
      * @brief Defines how to draw Ball
-     * @param QPainter canvas pointer
-     * @param Object to draw
+     * @param p QPainter canvas pointer
+     * @param o Object to draw
      */
     void drawBall(QPainter *p, const Object& o);
     /**
      * @brief Defines how to draw Hole
-     * @param QPainter canvas pointer
-     * @param Object to draw
+     * @param p QPainter canvas pointer
+     * @param o Object to draw
      */
     void drawHole(QPainter *p, const Object& o);
     /**
      * @brief Defines how to draw Star
-     * @param QPainter canvas pointer
-     * @param Object to draw
+     * @param p QPainter canvas pointer
+     * @param o Object to draw
      */
     void drawStar(QPainter *p, const Object& o);
     /**
      * @brief Defines how to draw End
-     * @param QPainter canvas pointer
-     * @param Object to draw
+     * @param p QPainter canvas pointer
+     * @param o Object to draw
      */
     void drawEnd(QPainter *p, const Object& o);
 
@@ -153,6 +171,7 @@ public:
      * @brief Starts main timer that handle updates of world
      */
     void start();
+
     /**
      * @brief Updates, deletes, control world, display
      */
@@ -237,12 +256,12 @@ protected:
 private slots:
      /**
       * @brief Recieve emited data from MC
-      * @param Line of input data
+      * @param line of input data
       */
      void on_data_stm(QString line);
      /**
       * @brief Setup control for mouse or MC
-      * @param Is MC connected or not
+      * @param isStm Is MC connected or not
       */
      void on_is_stm(int isStm);
 
@@ -253,8 +272,8 @@ signals:
      void mouseClicked();
      /**
       * @brief Emit info about points event
-      * @param Number of points
-      * @param Add or set mode
+      * @param points Number of points
+      * @param addSet Add or set mode
       */
      void setPoints(int points, int addSet);
 };

@@ -18,7 +18,7 @@ class ComPort : public QWidget
 public:
     /**
      * @brief Constructor of Comport
-     * @param Parent - MainWindow
+     * @param parent should be MainWindow
      */
     explicit ComPort(QWidget *parent = nullptr);
     ~ComPort();
@@ -42,6 +42,9 @@ private slots:
     void readFromPort();
 
 private:
+    /**
+     * @brief ui
+     */
     Ui::ComPort *ui;
     /**
      * @brief Pointer to device serial port
@@ -55,10 +58,12 @@ private:
 signals:
     /**
      * @brief Sends data from MC
+     * @param stm data send from MC
      */
     void dataStm(QString stm);
     /**
      * @brief Indicate if MC is connected
+     * @param isStm is or not
      */
     void isStmConnected(int isStm);
 };

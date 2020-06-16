@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['view',['view',['../class_game.html#a8639809d37a835e9e6cbdaa414596647',1,'Game']]]
+  ['roll',['roll',['../struct_stm_pos.html#a7d22af30289e5ff8c0411235ae26a64c',1,'StmPos']]]
 ];

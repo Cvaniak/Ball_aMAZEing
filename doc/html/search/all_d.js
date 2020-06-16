@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['setpoints',['setPoints',['../class_game.html#a006c7af9b94815f11a40a4416fd6e779',1,'Game']]],
-  ['start',['start',['../class_game.html#a3d9b98f7c4a96ecf578f75b96c9f0e90',1,'Game']]],
-  ['start_5fstop',['start_stop',['../class_main_window.html#a79a6e9de86f9c8abd9bdb4e0b029da13',1,'MainWindow']]],
-  ['stmpos',['StmPos',['../struct_stm_pos.html',1,'StmPos'],['../class_game.html#a1224d3e41bf822b043f1c2af88b0f7a7',1,'Game::stmPos()']]],
-  ['stop_5fgame',['stop_game',['../class_main_window.html#a517b51f27b9ccaf5421a8f97e31bf6ff',1,'MainWindow']]]
+  ['object',['Object',['../struct_object.html',1,'']]],
+  ['on_5fbconnect_5fclicked',['on_bConnect_clicked',['../class_com_port.html#a5f81ca5fd4a2d7d4666a3f4facff31b8',1,'ComPort']]],
+  ['on_5fbdisconnect_5fclicked',['on_bDisconnect_clicked',['../class_com_port.html#a6a17fafd3719c1c57ebcef2377e8aa3b',1,'ComPort']]],
+  ['on_5fbfind_5fclicked',['on_bFind_clicked',['../class_com_port.html#a34620502031bb6f3138a1e6a69c1ee76',1,'ComPort']]],
+  ['on_5fbstartstop_5fclicked',['on_bStartStop_clicked',['../class_main_window.html#a2a262a30e55f959314e750835d3ec13f',1,'MainWindow']]],
+  ['on_5fdata_5fstm',['on_data_stm',['../class_game.html#aa33685c1ee0e28c23b60fa4d5060765f',1,'Game']]],
+  ['on_5fis_5fstm',['on_is_stm',['../class_game.html#a1beefb365a9febc513164335a9947e7a',1,'Game']]]
 ];

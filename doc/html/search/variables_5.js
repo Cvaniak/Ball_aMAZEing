@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['isreset',['isReset',['../class_game.html#aca396d90c23573ad747e80a722fdfc86',1,'Game']]],
-  ['isrunning',['isRunning',['../class_game.html#aa3a7c0a7c2b266828664a1f644116df0',1,'Game']]],
-  ['isstmrunning',['isStmRunning',['../class_game.html#aea0673ef453b11e487a3e1de38b9def8',1,'Game']]]
+  ['game',['game',['../class_main_window.html#a568937c16f40d1f913552a824d8c1eb9',1,'MainWindow']]],
+  ['gameheight',['gameHeight',['../class_game.html#a321f066a3290b3924a5d1fab02840cb1',1,'Game']]],
+  ['gamescale',['gameScale',['../class_game.html#a56cf0469833ca1f68d0e326e813afd52',1,'Game']]],
+  ['gamestroke',['gameStroke',['../class_game.html#af0a2cffd4d736028dcf7ebfac519976f',1,'Game']]],
+  ['gamewidth',['gameWidth',['../class_game.html#a94a68ea0465ee4f3766f661902e4a90b',1,'Game']]]
 ];
