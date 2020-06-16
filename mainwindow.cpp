@@ -21,15 +21,23 @@ MainWindow::MainWindow(QWidget *parent)
 //    game->setParent();
     game->start();
 
+    bubble = new Bubble(this, ui->wBubble);
+
+    bubble->resize(ui->wBubble->size());
+//    game->resize(1000, 1000);
+//    game->setParent();
+    bubble->start();
     comport = new ComPort(ui->wConnect);
 //    comport->setParent(ui->wConnect);
 //    ui->wConnect = comport;
 
     QObject::connect(comport,SIGNAL(dataStm(QString)),this,SLOT(on_data_stm(QString)));
     QObject::connect(this,SIGNAL(dataStm(QString)),game,SLOT(on_data_stm(QString)));
+    QObject::connect(this,SIGNAL(dataStm(QString)),bubble,SLOT(on_data_stm(QString)));
 
     QObject::connect(comport,SIGNAL(isStmConnected(int)),this,SLOT(on_is_stm(int)));
     QObject::connect(this,SIGNAL(isStmConnected(int)),game,SLOT(on_is_stm(int)));
+    QObject::connect(this,SIGNAL(isStmConnected(int)),bubble,SLOT(on_is_stm(int)));
 
 //    game1->setGeometry(50,50,300,400);
 //    game->show();
