@@ -154,6 +154,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QWidget" name="wBubble" native="true">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>400</y>
+      <width>200</width>
+      <height>200</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
