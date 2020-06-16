@@ -164,6 +164,27 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="bPlot">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>620</y>
+      <width>180</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Karumbi</family>
+      <pointsize>45</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Plot</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

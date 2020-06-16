@@ -6,6 +6,7 @@
 #include "game.h"
 #include "bubble.h"
 #include "comport.h"
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,7 +36,27 @@ public:
     void start_stop(int should);
 
 private slots:
-
+    /**
+     * @brief Handle behaviour after collecting star
+     */
+    void on_star_collect();
+    /**
+     * @brief Handle behaviour after collecting hole
+     */
+    void on_hole_collect();
+    /**
+     * @brief Handle behaviour after collecting end
+     */
+    void on_end_collect();
+    /**
+     * @brief redistribute MC data
+     */
+    void on_data_stm(QString stm);
+    /**
+     * @brief Stops game after MC connection
+     * @param isStm
+     */
+    void on_is_stm(int isStm);
     /**
      * @brief Handle start stop button behaviour
      */
@@ -44,7 +65,14 @@ private slots:
      * @brief Stops game
      */
     void stop_game();
-//    void on_mouse_clicked();
+    /**
+     * @brief Create new Plot window
+     */
+    void on_bPlot_clicked();
+    /**
+     * @brief Create new Plot window
+     */
+    void on_dataToPlot();
 
 private:
     /**
@@ -63,6 +91,14 @@ private:
      * @brief Bubble widget pointer
      */
     Bubble *bubble;
+    /**
+     * @brief Plot Widget
+     */
+    QCustomPlot *plot;
+    /**
+     * @brief Plot Vectors
+     */
+    QVector<double> qv_x,qv_pitch,qv_roll;
 //    Game *game;
 
 signals:

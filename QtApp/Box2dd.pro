@@ -1,4 +1,4 @@
-QT       += core gui opengl serialport
+QT       += core gui opengl serialport printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,14 +21,16 @@ SOURCES += \
     game.cpp \
     main.cpp \
     mainwindow.cpp \
-    mcontactlistener.cpp
+    mcontactlistener.cpp \
+    qcustomplot.cpp
 
 HEADERS += \
     bubble.h \
     comport.h \
     game.h \
     mainwindow.h \
-    mcontactlistener.h
+    mcontactlistener.h \
+    qcustomplot.h
 
 FORMS += \
     comport.ui \
@@ -39,13 +41,13 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-unix:!macx|win32: LIBS += -L$$PWD/../../Pulpit/box2d-master/build/src/ -lbox2d
+unix:!macx|win32: LIBS += -L$$PWD/../../../Pulpit/box2d-master/build/src/ -lbox2d
 
-INCLUDEPATH += $$PWD/../../Pulpit/box2d-master/include/box2d
-DEPENDPATH += $$PWD/../../Pulpit/box2d-master/include/box2d
+INCLUDEPATH += $$PWD/../../../Pulpit/box2d-master/include/box2d
+DEPENDPATH += $$PWD/../../../Pulpit/box2d-master/include/box2d
 
-INCLUDEPATH += $$PWD/../../Pulpit/box2d-master/include
-DEPENDPATH += $$PWD/../../Pulpit/box2d-master/include
+INCLUDEPATH += $$PWD/../../../Pulpit/box2d-master/include
+DEPENDPATH += $$PWD/../../../Pulpit/box2d-master/include
 
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../Pulpit/box2d-master/build/src/box2d.lib
-else:unix:!macx|win32-g++: PRE_TARGETDEPS += $$PWD/../../Pulpit/box2d-master/build/src/libbox2d.a
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../Pulpit/box2d-master/build/src/box2d.lib
+else:unix:!macx|win32-g++: PRE_TARGETDEPS += $$PWD/../../../Pulpit/box2d-master/build/src/libbox2d.a

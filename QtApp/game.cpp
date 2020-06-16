@@ -13,7 +13,7 @@ Game::Game(QWidget *viewT, QWidget* parent):QWidget(parent), _timerId(0)
     isRunning = 0;
     isStmRunning = 0;
     isReset = 0;
-    stmPos.roll = 0;
+    stmPos.roll = 2;
     stmPos.pitch = 0;
     gameScale = 1.f;
     gameWidth = parent->size().width()*gameScale;
@@ -31,6 +31,7 @@ Game::Game(QWidget *viewT, QWidget* parent):QWidget(parent), _timerId(0)
     QObject::connect(contactListener,SIGNAL(hole_collect()),view,SLOT(on_hole_collect()));
     QObject::connect(contactListener,SIGNAL(end_collect()),view,SLOT(on_end_collect()));
     QObject::connect(this,SIGNAL(mouseClicked()),view,SLOT(on_bStartStop_clicked()));
+    QObject::connect(this,SIGNAL(dataToPlot()),view,SLOT(on_dataToPlot()));
 
     resetGame();
 
@@ -439,6 +440,8 @@ void Game::timerEvent(QTimerEvent *event) {
                 controlStm();
             else
                 control();
+            if(true)
+                emit dataToPlot();
         }
         // Remove all numbers < 0 from QVector<int>
         update();
@@ -489,7 +492,6 @@ void Game::on_data_stm(QString line){
         float Pitch = atan2(-x, sqrt(y*y + z*z)) * 180/M_PI;
         stmPos.roll = Roll;
         stmPos.pitch = Pitch;
-
 //        qDebug() << "RP" << roll << pitch;
     }
     else if(list.at(0) == "Y"){

@@ -271,6 +271,10 @@ signals:
       */
      void mouseClicked();
      /**
+      * @brief Data to plot info
+      */
+     void dataToPlot();
+     /**
       * @brief Emit info about points event
       * @param points Number of points
       * @param addSet Add or set mode

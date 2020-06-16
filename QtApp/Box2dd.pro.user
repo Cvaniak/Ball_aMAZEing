@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2020-06-16T00:27:18. -->
+<!-- Written by QtCreator 4.11.1, 2020-06-16T16:54:07. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -91,7 +91,7 @@
      </valuemap>
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.2">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">/home/elcvaniako/Qttttt/Box2dd/Doxyfile</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">/home/elcvaniako/Qttttt/Box2dd/QtApp/Doxyfile</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Command">doxygen</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">%{buildDir}</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.ProcessStep</value>
@@ -292,8 +292,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/elcvaniako/Qttttt/Box2dd/Box2dd.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/elcvaniako/Qttttt/Box2dd/Box2dd.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Box2dd2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/elcvaniako/Qttttt/Box2dd/QtApp/Box2dd.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/elcvaniako/Qttttt/Box2dd/QtApp/Box2dd.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
